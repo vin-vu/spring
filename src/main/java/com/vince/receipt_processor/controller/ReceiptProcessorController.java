@@ -8,25 +8,28 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
+@RequestMapping("/receipts")
 public class ReceiptProcessorController {
 
-  @Autowired
-  private ReceiptProcessorService receiptProcessorService;
+  @Autowired private ReceiptProcessorService receiptProcessorService;
 
   private static final Logger logger = LoggerFactory.getLogger(ReceiptProcessorController.class);
 
-  @PostMapping(value = "/receipts/process")
+  @PostMapping(value = "/process")
   private ReceiptResponse processReceipt(@Valid @RequestBody ReceiptRequest receipt) {
     logger.info("Receipt: {}", receipt.getRetailer());
 
     String receiptId = receiptProcessorService.saveReceipt(receipt);
     logger.info("id: {}", receiptId);
     return new ReceiptResponse(receiptId);
+  }
+
+  @GetMapping(value = "/{id}/points")
+  private void getPoints(@PathVariable String id) {
+    logger.info("id: {}, ", id);
   }
 }
