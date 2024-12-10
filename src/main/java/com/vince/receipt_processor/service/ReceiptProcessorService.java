@@ -20,4 +20,20 @@ public class ReceiptProcessorService {
     return receiptId;
   }
 
+  public int calculatePoints(String id) {
+    ReceiptRequest receipt = receiptStorage.get(id);
+    String retailer = receipt.getRetailer();
+
+    long retailerPoints = retailer.chars().filter(Character::isLetterOrDigit).count();
+    logger.info("Retailer points: {} ", retailerPoints);
+
+    String total = receipt.getTotal();
+    int pointsForRoundDollar = Double.parseDouble(total) % 1 == 0 ? 50 : 0;
+    int pointsForMultiplePoint25 = Double.parseDouble(total) % 0.25 == 0 ? 25 : 0;
+
+    double pointsForEvery2Items = Math.ceil((double) receipt.getItems().size() / 2);
+    return 0;
+
+  }
+
 }
