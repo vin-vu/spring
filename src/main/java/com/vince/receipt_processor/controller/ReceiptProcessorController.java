@@ -3,6 +3,7 @@ package com.vince.receipt_processor.controller;
 import com.vince.receipt_processor.pojo.ReceiptRequest;
 import com.vince.receipt_processor.pojo.ReceiptResponse;
 import com.vince.receipt_processor.service.ReceiptProcessorService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class ReceiptProcessorController {
   private static final Logger logger = LoggerFactory.getLogger(ReceiptProcessorController.class);
 
   @PostMapping(value = "/receipts/process")
-  private ReceiptResponse processReceipt(@RequestBody ReceiptRequest receipt) {
+  private ReceiptResponse processReceipt(@Valid @RequestBody ReceiptRequest receipt) {
     logger.info("Receipt: {}", receipt.getRetailer());
 
     String receiptId = receiptProcessorService.saveReceipt(receipt);
