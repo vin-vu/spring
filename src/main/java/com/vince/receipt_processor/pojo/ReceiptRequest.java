@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Receipt {
+public class ReceiptRequest {
   String retailer;
   String purchaseDate;
   String purchaseTime;
