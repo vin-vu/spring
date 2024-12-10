@@ -30,7 +30,7 @@ public class ReceiptProcessorController {
 
   @GetMapping(value = "/{id}/points")
   private void getPoints(@PathVariable String id) {
-    logger.info("id: {}, ", id);
+    logger.info("id: {}", id);
     receiptProcessorService.calculatePoints(id);
   }
 }
