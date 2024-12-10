@@ -15,7 +15,7 @@ public class ReceiptProcessorController {
   private static final Logger logger = LoggerFactory.getLogger(ReceiptProcessorController.class);
 
   @PostMapping("/receipts/process")
-  void processReceipt(@RequestBody Receipt receipt) {
+  private void processReceipt(@RequestBody Receipt receipt) {
     System.out.println(receipt.getRetailer());
     logger.info("Receipt: {}", receipt);
   }
